@@ -25,22 +25,25 @@ class RosImgProcessorNode
         
         // subscribers to the image and camera info topics
         image_transport::Subscriber image_subs_;
-        ros::Subscriber camera_info_subs;
+        ros::Subscriber camera_info_subs_;
 
         //publishers
         image_transport::Publisher image_pub_;      
         
         //pointer to received (in) and published (out) images
-        cv_bridge::CvImagePtr cv_img_ptr_in_;            
-        cv_bridge::CvImage cv_img_ptr_out_;
+        cv_bridge::CvImagePtr cv_img_ptr_in_;
+        cv_bridge::CvImage cv_img_out_;
+        
+        //image encoding label
+        std::string img_encoding_;
         
         //wished process rate, [hz]
         double rate_;
         
     protected: 
         // callbacks
-        void image_callback(const sensor_msgs::ImageConstPtr& _msg);
-        void cameraInfo_callback(const sensor_msgs::CameraInfo & _msg);
+        void imageCallback(const sensor_msgs::ImageConstPtr& _msg);
+        void cameraInfoCallback(const sensor_msgs::CameraInfo & _msg);
 
     public:
         /** \brief Constructor
@@ -70,5 +73,12 @@ class RosImgProcessorNode
         * 
         */
         void publish();                              
+        
+        /** \brief Returns rate_
+         * 
+         * Returns rate_
+         * 
+         **/
+        double getRate() const;
 };
 #endif
