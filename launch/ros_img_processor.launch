@@ -1,0 +1,29 @@
+<!-- Launches ros_img_processor and two image windows-->
+
+<launch>
+
+    <!-- Webcam and image window for input image -->
+    <include file="$(find ros_img_processor)/launch/usb_camera.launch"/>
+
+    <!--Fake processor-->
+    <node name="ros_img_processor"
+        pkg="ros_img_processor"
+        type="ros_img_processor"
+        output="screen"
+        args="1">
+        <remap from="/ros_img_processor/image_in" to="/usb_cam/image_raw"/>
+    </node>
+    
+    <!--Image window for output image -->
+    <node 
+        name="image_view_out" 
+        pkg="image_view" 
+        type="image_view" 
+        respawn="false" 
+        output="screen">
+        <remap from="image" to="/ros_img_processor/image_out"/>
+        <param name="autosize" value="true" />
+    </node>
+
+</launch>
+
