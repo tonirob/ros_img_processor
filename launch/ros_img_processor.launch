@@ -4,6 +4,14 @@
 	<!-- User arguments -->
 	<arg name="video_device"  default="/dev/video0" />
 	<arg name="show_image"  default="true" />
+	<arg name="show_rviz"  default="true" />
+
+	<!-- camera frame attached with the world frame -->
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="camera_frame"
+		args="0 0 0 0 0 0 1 world camera 50" />
 
 	<!-- camera capture -->
 	<node
@@ -29,7 +37,7 @@
 		respawn="true" >
 	</node>
 
-	<!--Fake processor-->
+	<!--Image processor-->
 	<node name="ros_img_processor"
 		pkg="ros_img_processor"
 		type="ros_img_processor"
@@ -58,6 +66,16 @@
 			output="screen">
 			<remap from="image" to="/ros_img_processor/image_out"/>
 			<param name="autosize" value="false" />
+		</node>
+	</group>
+
+	<!-- Run rviz node -->
+	<group if="$(arg show_rviz)">
+		<node
+			pkg="rviz"
+			type="rviz"
+			name="rviz"
+			args="-d $(find ros_img_processor)/rviz/ros_img_processor.rviz">
 		</node>
 	</group>
 
