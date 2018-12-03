@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
     <name>ros_img_processor</name>
     <version>0.0.0</version>
     <description>
         Just a simple template node receivng an image and doing something. Links to OpenCV and ROS wrapped.
     </description>
 
-    <!-- One maintainer tag required, multiple allowed, one person per tag --> 
+    <!-- One maintainer tag required, multiple allowed, one person per tag -->
     <maintainer email="andreu@beta-robots.com">Andreu Corominas Murtra</maintainer>
 
     <!-- One license tag required, multiple allowed, one license per tag -->
@@ -21,14 +21,10 @@
     <!-- The *_depend tags are used to specify dependencies -->
     <buildtool_depend>catkin</buildtool_depend>
 
-    <build_depend>roscpp</build_depend>
-    <build_depend>rospy</build_depend>
-    <build_depend>image_transport</build_depend>
-    <build_depend>cv_bridge</build_depend>
-    
-    <run_depend>roscpp</run_depend>
-    <run_depend>rospy</run_depend>
-    <run_depend>image_transport</run_depend>
-    <run_depend>cv_bridge</run_depend> 
+    <depend>roscpp</depend>
+    <depend>rospy</depend>
+    <depend>image_transport</depend>
+    <depend>cv_bridge</depend>
+	<depend>visualization_msgs</depend>
 
 </package>
